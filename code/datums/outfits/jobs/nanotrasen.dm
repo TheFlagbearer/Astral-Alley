@@ -58,6 +58,8 @@
 	l_hand = /obj/item/weapon/paper
 	r_hand = /obj/item/weapon/clipboard
 	id_pda_assignment = "Governor"
+	backpack_contents = list(/obj/item/clothing/accessory/permit/gun/tier_five = 1,
+	/obj/item/weapon/card/department/nanotrasen = 1, /obj/item/weapon/device/pod_recaller = 1)
 
 /decl/hierarchy/outfit/job/nanotrasen/vpresident
 	name = OUTFIT_JOB_NAME("Vice President")
@@ -73,7 +75,8 @@
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/com
 	id_type = /obj/item/weapon/card/id/nanotrasen/president
 	pda_type = /obj/item/device/pda/captain
-
+	backpack_contents = list(/obj/item/clothing/accessory/permit/gun/tier_five = 1,
+	/obj/item/weapon/card/department/nanotrasen = 1, /obj/item/weapon/device/pod_recaller = 1)
 
 /decl/hierarchy/outfit/job/nanotrasen/guard //Deployed to keep NT officials safe, like the city hall guard -- not death squad
 	name = "Nanotrasen Security" //Name also subject to lore nerds, Nanotrasen Guard just seemed wimpy
@@ -129,6 +132,8 @@
 	l_ear = /obj/item/device/radio/headset/government
 	id_pda_assignment = "Advisor"
 	id_type = /obj/item/weapon/card/id/nanotrasen/advisor
+	backpack_contents = list(/obj/item/clothing/accessory/permit/gun/tier_five = 1,
+	/obj/item/weapon/card/department/nanotrasen = 1, /obj/item/weapon/device/pod_recaller = 1)
 
 /decl/hierarchy/outfit/job/nanotrasen/president
 	name = OUTFIT_JOB_NAME("President")
@@ -143,6 +148,8 @@
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/com
 	id_type = /obj/item/weapon/card/id/nanotrasen/president
 	pda_type = /obj/item/device/pda/captain
+	backpack_contents = list(/obj/item/clothing/accessory/permit/gun/tier_five = 1,
+	/obj/item/weapon/card/department/nanotrasen = 1, /obj/item/weapon/device/pod_recaller/president = 1)
 
 /decl/hierarchy/outfit/job/nanotrasen/president/post_equip(var/mob/living/carbon/human/H)
 	..()
