@@ -149,3 +149,19 @@ var/list/turf_edge_cache = list()
 			if(prob(66))
 				return
 	demote()
+
+// Martian Surface
+
+/turf/simulated/floor/outdoors/mars
+	name = "martian soil"
+	desc = "Lifeless rock and sand..."
+	icon = 'icons/turf/mars.dmi'
+	icon_state = "asteroid0"
+	edge_blending_priority = 3
+	can_build_onto = 1
+
+/turf/simulated/floor/outdoors/mars/plating
+	name = "plating"
+	desc = "Dust-covered plating."
+	icon_state = "asteroidplating"
+	can_build_onto = 1
