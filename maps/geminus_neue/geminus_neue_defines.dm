@@ -9,7 +9,7 @@
 	path = "geminus"
 
 	lobby_icon = 'icons/misc/title.dmi'
-	lobby_screens = list("geminus")
+	lobby_screens = list("astral")
 
 	zlevel_datum_type = /datum/map_z_level/geminus_neue
 

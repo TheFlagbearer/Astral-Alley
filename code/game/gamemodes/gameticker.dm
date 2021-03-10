@@ -34,7 +34,7 @@ var/global/datum/controller/gameticker/ticker
 	var/round_end_announced = 0 // Spam Prevention. Announce round end only once.
 
 /datum/controller/gameticker/proc/pregame()
-	login_music = 'sound/music/NightCity.ogg'
+	login_music = 'sound/music/MagicCastle.ogg'
 
 	send2mainirc("Server lobby is loaded and open at byond://[config.serverurl ? config.serverurl : (config.server ? config.server : "[world.address]:[world.port]")]")
 
