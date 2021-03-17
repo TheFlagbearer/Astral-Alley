@@ -391,3 +391,6 @@
 	recipes = list()
 
 	recipes += new/datum/stack_recipe("[display_name] rag", /obj/item/weapon/reagent_containers/glass/rag, 2, time = 2, one_per_turf = 0, on_floor = 1, apply_material_color = TRUE, prefix = TRUE)
+
+/material/astralite/generate_recipes()
+	recipes = list()

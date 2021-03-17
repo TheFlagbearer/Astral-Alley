@@ -59,6 +59,8 @@
 /turf/simulated/wall/snowbrick/New(var/newloc)
 	icon_state = "brick"
 	..(newloc,"packed snow")
+/turf/simulated/wall/astrasteel/New(var/newloc)
+	..(newloc, "astralite", "durasteel")
 
 // Kind of wondering if this is going to bite me in the butt.
 /turf/simulated/wall/skipjack/New(var/newloc)
