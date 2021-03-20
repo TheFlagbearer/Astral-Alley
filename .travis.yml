@@ -12,7 +12,7 @@ env:
     global:
     - BYOND_MAJOR="513"
     - BYOND_MINOR="1502"
-    - DM_BUILDFILE="polaris.dme"
+    - DM_BUILDFILE="AstralAlley.dme"
 
 cache:
   directories:
