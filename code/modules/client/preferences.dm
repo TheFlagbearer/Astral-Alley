@@ -84,7 +84,7 @@ datum/preferences
 	var/b_synth							//Same as above
 
 		//Some faction information.
-	var/home_system = "Vetra"           //System of birth.
+	var/birthplace = "Vetra"           //System of birth.
 	var/citizenship = "Blue Colony"     //Current home system.
 	var/faction = "NanoTrasen Colony Civilian"                //General associated faction.
 	var/religion = "None"               //Religious association.
@@ -155,6 +155,7 @@ datum/preferences
 
 	var/economic_status = "Working Class"
 	var/social_class = "Working Class"
+	var/SINless = FALSE
 
 	var/uplinklocation = "PDA"
 	var/email
@@ -420,3 +421,20 @@ datum/preferences
 				return PREF_FBP_CYBORG
 
 	return FALSE
+
+/datum/preferences/proc/get_birthplace_abbrev() // Used to generate a SIN
+	switch(birthplace)
+		if("Africa")
+			return "AFRO"
+		if("Asia")
+			return "AISA"
+		if("Europe")
+			return "EURO"
+		if("Oceania")
+			return "OCE"
+		if("North America")
+			return "NA"
+		if("South America")
+			return "SA"
+		if("Luna")
+			return "LUNA"

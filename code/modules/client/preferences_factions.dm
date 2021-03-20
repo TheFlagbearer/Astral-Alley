@@ -8,25 +8,27 @@ var/global/list/seen_religions = list()
 /proc/UpdateFactionList(mob/living/carbon/human/M)
 	/*if(M && M.client && M.client.prefs)
 		seen_citizenships |= M.client.prefs.citizenship
-		seen_systems      |= M.client.prefs.home_system
+		seen_systems      |= M.client.prefs.birthplace
 		seen_factions     |= M.client.prefs.faction
 		seen_religions    |= M.client.prefs.religion*/
 	return
 
 var/global/list/citizenship_choices = list(
-	"Blue Colony",
-	"Cascington",
-	"Ocral Spax A",
-	"Ocral Spax B",
-	"Glace Gria",
-	"Glace Grace",
-	"Castor"
+	"Terminus",
+	"Elysium",
+	"Solitid",
+	"Helgrind",
+	"Keisho",
 	)
 
-var/global/list/home_system_choices = list(
-	"Vetra",
-	"Sol",
-	"Andromeda"
+var/global/list/birthplace_choices = list(
+	"Africa",
+	"Asia",
+	"Europe",
+	"Oceania",
+	"North America",
+	"South America",
+	"Luna"
 	)
 
 var/global/list/faction_choices = list(

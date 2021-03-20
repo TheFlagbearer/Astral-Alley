@@ -468,7 +468,7 @@ SUBSYSTEM_DEF(jobs)
 		job.equip_backpack(H)
 		job.apply_fingerprints(H)
 
-		equip_passport(H)
+	//	equip_passport(H)
 		equip_permits(H)
 		if(job.title != "Cyborg" && job.title != "AI")
 			H.equip_post_job()
@@ -804,19 +804,19 @@ SUBSYSTEM_DEF(jobs)
 		.["turf"] = get_turf(spawning)
 		.["msg"] = "has arrived to the city"
 
-
+/*
 /datum/controller/subsystem/jobs/proc/equip_passport(var/mob/living/carbon/human/H)
 	var/obj/item/weapon/passport/pass = new/obj/item/weapon/passport(get_turf(H))
 
 	if(!H.mind || !H.mind.prefs) return
 
 	pass.name = "[H.real_name]'s passport"
-	pass.citizenship = H.mind.prefs.home_system
+	pass.citizenship = H.mind.prefs.birthplace
 	pass.owner = H.real_name
 
 	H.update_passport(pass)
 	H.equip_to_slot_or_del(pass, slot_in_backpack)
-
+*/
 /datum/controller/subsystem/jobs/proc/equip_permits(var/mob/living/carbon/human/H)
 	if(!H.mind || !H.mind.prefs) return
 

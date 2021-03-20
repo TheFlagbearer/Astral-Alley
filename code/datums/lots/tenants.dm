@@ -18,7 +18,7 @@
 // Future: Allow landlords to discriminate against their tenants.
 /*
 	var/has_criminal_record = FALSE
-	var/home_system = "Vetra"
+	var/birthplace = "Vetra"
 	var/is_synthetic = FALSE
 */
 

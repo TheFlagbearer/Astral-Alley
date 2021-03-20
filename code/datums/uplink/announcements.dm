@@ -82,7 +82,7 @@
 		general.fields["citizenship"]	= random_general_record.fields["citizenship"]
 		general.fields["faction"] 		= random_general_record.fields["faction"]
 		general.fields["fingerprint"] 	= random_general_record.fields["fingerprint"]
-		general.fields["home_system"] 	= random_general_record.fields["home_system"]
+		general.fields["birthplace"] 	= random_general_record.fields["birthplace"]
 		general.fields["religion"] 		= random_general_record.fields["religion"]
 	if(random_medical_record)
 		medical.fields["b_type"]		= random_medical_record.fields["b_type"]

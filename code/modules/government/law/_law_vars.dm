@@ -20,8 +20,8 @@
 				return "Has a Synthetic Brain"
 
 	if(!SSpersistent_options.get_persistent_option_value("voting_noncitizen"))
-		if(H.home_system != using_map.starsys_name)
-			return "Is from [H.home_system] and not from [using_map.starsys_name]"
+		if(H.birthplace != using_map.starsys_name)
+			return "Is from [H.birthplace] and not from [using_map.starsys_name]"
 
 	if(!SSpersistent_options.get_persistent_option_value("voting_excon"))
 		var/datum/data/record/police_record = get_sec_record(H)

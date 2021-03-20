@@ -138,7 +138,7 @@
 							ID: <A href='?src=\ref[src];choice=Edit Field;field=id'>[active1.fields["id"]]</A><BR>\n	\
 							Entity Classification: <A href='?src=\ref[src];field=brain_type'>[active1.fields["brain_type"]]</A><BR>\n	\
 							Citizenship: <A href='?src=\ref[src];field=citizenship'>[active1.fields["citizenship"]]</A><BR>\n	\
-							Home System: <A href='?src=\ref[src];field=home_system'>[active1.fields["home_system"]]</A><BR>\n	\
+							Home System: <A href='?src=\ref[src];field=birthplace'>[active1.fields["birthplace"]]</A><BR>\n	\
 							Sex: <A href='?src=\ref[src];choice=Edit Field;field=sex'>[active1.fields["sex"]]</A><BR>\n	\
 							Age: <A href='?src=\ref[src];choice=Edit Field;field=age'>[active1.fields["age"]]</A><BR>\n	\
 							Occupation: <A href='?src=\ref[src];choice=Edit Field;field=rank'>[active1.fields["rank"]]</A><BR>\n	\
@@ -389,7 +389,7 @@ What a mess.*/
 				var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( computer.loc )
 				P.info = "<CENTER><B>Security Record</B></CENTER><BR>"
 				if(record1)
-					P.info += text("Name: [] ID: []<BR>\nSex: []<BR>\nAge: []<BR>\nCitizenship: []<BR>\nHome System: []<BR>\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>", record1.fields["name"], record1.fields["id"], record1.fields["sex"], record1.fields["age"], record1.fields["citizenship"], record1.fields["home_system"], record1.fields["fingerprint"], record1.fields["p_stat"], record1.fields["m_stat"])
+					P.info += text("Name: [] ID: []<BR>\nSex: []<BR>\nAge: []<BR>\nCitizenship: []<BR>\nHome System: []<BR>\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>", record1.fields["name"], record1.fields["id"], record1.fields["sex"], record1.fields["age"], record1.fields["citizenship"], record1.fields["birthplace"], record1.fields["fingerprint"], record1.fields["p_stat"], record1.fields["m_stat"])
 					P.name = text("Security Record ([])", record1.fields["name"])
 				else
 					P.info += "<B>General Record Lost!</B><BR>"
