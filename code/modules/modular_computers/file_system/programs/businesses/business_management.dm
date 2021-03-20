@@ -342,7 +342,7 @@
 			page_msg += "<b>Name:</b> [selected_business.name]<br>"
 			if(selected_business.description)
 				page_msg += "<b>Description:</b> [selected_business.description]<br>"
-			page_msg += "<b>Unique ID:</b> [selected_business.business_uid]<br>"
+			page_msg += "<b>System Identification Number:</b> [selected_business.business_uid]<br>"
 			page_msg += "<b>Suspended:</b> [selected_business.suspended ? "Yes" : "No"]<br>"
 			if(selected_business.suspended)
 				page_msg += "<b>Suspended Reason: [selected_business.suspended_reason]<br>"
