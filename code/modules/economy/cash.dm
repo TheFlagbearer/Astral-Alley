@@ -16,7 +16,7 @@
 	access = access_crate_cash
 	var/worth = 0
 	drop_sound = 'sound/items/drop/paper.ogg'
-	var/list/possible_values = list(100,50,20,10,5,2,1)
+	var/list/possible_values = list(100,50,20,10,5,1)
 
 	unique_save_vars = list("worth")
 
@@ -121,12 +121,6 @@
 	icon_state = "1"
 	desc = "It's worth 1 credit."
 	worth = 1
-
-/obj/item/weapon/spacecash/bundle/c2
-	name = "2 credit chip"
-	icon_state = "2"
-	desc = "It's worth 2 credits."
-	worth = 2
 
 /obj/item/weapon/spacecash/bundle/c5
 	name = "5 credit chip"
