@@ -91,10 +91,7 @@
 	dat += text("Name: []</A><BR>", registered_name)
 	dat += text("Sex: []</A><BR>\n", sex)
 	dat += text("Age: []</A><BR>\n", age)
-	dat += text("Job: []</A><BR>\n", assignment)
-	dat += text("Fingerprint: []</A><BR>\n", fingerprint_hash)
-	dat += text("Blood Type: []<BR>\n", blood_type)
-	dat += text("DNA Hash: []<BR><BR>\n", dna_hash)
+	dat += text("Occupation: []</A><BR>\n", assignment)
 	if(front && side)
 		dat +="<td align = center valign = top>Photo:<br><img src=front.png height=80 width=80 border=4><img src=side.png height=80 width=80 border=4></td>"
 	dat += "</tr></table>"
