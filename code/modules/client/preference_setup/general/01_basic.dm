@@ -27,6 +27,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	S["played"]				>> pref.played
 	S["unique_id"]				>> pref.unique_id
 	S["silent_join"]			>> pref.silent_join
+	S["SINless"]				>> pref.SINless
 
 /datum/category_item/player_setup_item/general/basic/save_character(var/savefile/S)
 	S["real_name"]				<< pref.real_name
@@ -45,6 +46,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	S["played"]				<< pref.played
 	S["unique_id"]				<< pref.unique_id
 	S["silent_join"]			<< pref.silent_join
+	S["SINless"]				<< pref.SINless
 
 /datum/category_item/player_setup_item/general/basic/delete_character()
 	if(pref.played)
@@ -67,7 +69,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	if(fdel("data/persistent/emails/[pref.email].sav"))
 		pref.email = null
 	pref.silent_join = null
-
+	pref.SINless = null
 
 /datum/category_item/player_setup_item/general/basic/sanitize_character()
 
@@ -88,8 +90,8 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	pref.nickname		= sanitize_name(pref.nickname)
 	pref.spawnpoint         = sanitize_inlist(pref.spawnpoint, spawntypes, initial(pref.spawnpoint))
 //	pref.be_random_name     = sanitize_integer(pref.be_random_name, 0, 1, initial(pref.be_random_name))
-	if(!pref.unique_id)
-		pref.unique_id			= md5("[pref.client_ckey][rand(30,50)]")
+	if(!pref.unique_id && !pref.SINless)
+		pref.unique_id			= md5("[pref.get_birthplace_abbrev()]-[pref.client_ckey][rand(0,99)]")
 
 	if(!pref.email)
 		var/new_email = SSemails.generate_email(pref.real_name)
@@ -125,8 +127,6 @@ datum/preferences/proc/set_biological_gender(var/gender)
 	character.birth_year = pref.birth_year
 	character.birth_month = pref.birth_month
 
-F
-
 /datum/category_item/player_setup_item/general/basic/content()
 	. = list()
 	. += "<h1>Basic Information:</h1><hr>"
@@ -161,7 +161,10 @@ F
 		. += "Login: [pref.email]<br>Password: [SSemails.get_persistent_email_password(pref.email)] <br><br>"
 
 	if(pref.existing_character)
-		. += "<b>Unique Character ID:</b> [pref.unique_id]<br>"
+		if(!pref.SINless)
+			. += "<b>System Identification Number:</b> [pref.unique_id]<br>"
+		else
+			. += "<b>System Identification Number: SINless</b>"
 
 
 	. += "<b>Birthday:</b><br>"
@@ -174,7 +177,24 @@ F
 		. += "[pref.birth_day]/[pref.birth_month]/[pref.birth_year]<br><br>"
 
 	. += "<b>Spawn Point</b>:<br> <a href='?src=\ref[src];spawnpoint=1'>[pref.spawnpoint]</a><br>"
-	. += "<b>Silent Arrival</b>:<br> <a href='?src=\ref[src];silent_join=1'>[(pref.silent_join) ? "Yes" : "No"]</a><br>"
+
+	if(!pref.SINless)
+		. += "<b>Silent Arrival</b>:<br> <a href='?src=\ref[src];silent_join=1'>[(pref.silent_join) ? "Yes" : "No"]</a><br>"
+	else
+		. += "<b>Silent Arrival</b>: [(pref.silent_join) ? "Yes" : "No"]<br>"
+
+	if(!pref.existing_character)
+		. += "<b>SINless</b>:<br> <a href='?src=\ref[src];SINless=1'>[(pref.SINless) ? "Yes" : "No"]</a><br>"
+	else
+		. += "<b>SINless</b>: [(pref.SINless) ? "Yes" : "No"]<br>"
+
+	. += "<br>"
+
+	if(pref.SINless)
+		. += "<div class='notice'><b>Warning:</b> You are playing a SINless character. In this universe, SINless persons are those without a System \
+		Identification Number, either due to social status, species, or necessity. SINless characters are <b>NOT</b> able to gain lawful employment \
+		or equal rights. This will put your character at a significant disadvantage during gameplay until they choose to receive a SIN or one is given to \
+		them. Criminal characters and other subversive elements may find a benefit in being SINless. Silent Arrival cannot be disabled for SINless characters.</div><br>"
 
 	if(config.allow_Metadata)
 		. += "<b>OOC Notes:</b><br> <a href='?src=\ref[src];metadata=1'> Edit </a><br>"
@@ -321,6 +341,13 @@ F
 	else if(href_list["silent_join"])
 		if(CanUseTopic(user))
 			pref.silent_join = !pref.silent_join
+			return TOPIC_REFRESH
+
+	else if(href_list["SINless"])
+		if(!pref.existing_character)
+			pref.SINless = !pref.SINless
+			if(pref.SINless)
+				pref.silent_join = TRUE
 			return TOPIC_REFRESH
 
 	return ..()

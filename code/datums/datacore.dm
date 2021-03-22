@@ -146,7 +146,8 @@
 /datum/datacore/proc/manifest()
 	spawn()
 		for(var/mob/living/carbon/human/H in player_list)
-			manifest_inject(H)
+			if(!H.mind.prefs.SINless)
+				manifest_inject(H)
 		return
 
 /datum/datacore/proc/manifest_modify(var/name, var/assignment)
@@ -194,7 +195,7 @@
 		G.fields["m_stat"]		= "Stable"
 		G.fields["sex"]			= gender2text(H.gender)
 		G.fields["species"]		= H.get_species()
-		G.fields["home_system"]	= H.home_system
+		G.fields["birthplace"]	= H.birthplace
 		G.fields["citizenship"]	= H.citizenship
 		G.fields["faction"]		= H.personal_faction
 		G.fields["email"]		= H.mind.initial_email_login["login"]
@@ -251,7 +252,7 @@
 		L.fields["enzymes"]		= H.dna.SE // Used in respawning
 		L.fields["identity"]	= H.dna.UI // "
 		L.fields["species"]		= H.get_species()
-		L.fields["home_system"]	= H.home_system
+		L.fields["birthplace"]	= H.birthplace
 		L.fields["citizenship"]	= H.citizenship
 		L.fields["faction"]		= H.personal_faction
 		L.fields["religion"]	= H.religion
@@ -296,7 +297,7 @@
 	G.fields["p_stat"] = "Active"
 	G.fields["m_stat"] = "Stable"
 	G.fields["species"] = SPECIES_HUMAN
-	G.fields["home_system"]	= "Unknown"
+	G.fields["birthplace"]	= "Unknown"
 	G.fields["citizenship"]	= "Unknown"
 	G.fields["faction"]		= "Unknown"
 	G.fields["religion"]	= "Unknown"

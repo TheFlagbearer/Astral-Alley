@@ -190,7 +190,7 @@
 				nanoui_data["exploit"]["age"] =  html_encode(L.fields["age"])
 				nanoui_data["exploit"]["species"] =  html_encode(L.fields["species"])
 				nanoui_data["exploit"]["rank"] =  html_encode(L.fields["rank"])
-				nanoui_data["exploit"]["home_system"] =  html_encode(L.fields["home_system"])
+				nanoui_data["exploit"]["birthplace"] =  html_encode(L.fields["birthplace"])
 				nanoui_data["exploit"]["citizenship"] =  html_encode(L.fields["citizenship"])
 				nanoui_data["exploit"]["faction"] =  html_encode(L.fields["faction"])
 				nanoui_data["exploit"]["religion"] =  html_encode(L.fields["religion"])

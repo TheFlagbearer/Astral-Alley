@@ -252,7 +252,7 @@
 				page_msg += "<strong>Non-National Wage:</strong> [job.nonnational_wage] <a href='?src=\ref[src];choice=modify_nonnational_wage;job=\ref[job]'>Change</a><br>"
 
 				page_msg += "<strong>Allow Synths?:</strong> [job.allows_synths ? "Yes" : "No"] <a href='?src=\ref[src];choice=synth_toggle;job=\ref[job]'>Toggle</a><br>"
-
+				page_msg += "<strong>Allow SINless?:</strong> [job.allows_sinless ? "Yes" : "No"] <a href='?src=\ref[src];choice=sinless_toggle;job=\ref[job]'>Toggle</a><br>"
 				page_msg += "<strong>Clean Criminal Record Required:</strong> [job.clean_record_required ? "Yes" : "No"] <a href='?src=\ref[src];choice=toggle_record_req;job=\ref[job]'>Toggle</a><br>"
 				page_msg += "<strong>Minimum Employee Age:</strong> [job.minimum_character_age] <a href='?src=\ref[src];choice=adjust_minimum_age;job=\ref[job]'>Adjust</a><br>"
 				page_msg += "<strong>Exploitable Job*:</strong> [job.minimal_player_age ? "Yes" : "No"] <a href='?src=\ref[src];choice=exploitable_job_toggle;job=\ref[job]'>Toggle</a><br>"
@@ -342,7 +342,7 @@
 			page_msg += "<b>Name:</b> [selected_business.name]<br>"
 			if(selected_business.description)
 				page_msg += "<b>Description:</b> [selected_business.description]<br>"
-			page_msg += "<b>Unique ID:</b> [selected_business.business_uid]<br>"
+			page_msg += "<b>System Identification Number:</b> [selected_business.business_uid]<br>"
 			page_msg += "<b>Suspended:</b> [selected_business.suspended ? "Yes" : "No"]<br>"
 			if(selected_business.suspended)
 				page_msg += "<b>Suspended Reason: [selected_business.suspended_reason]<br>"
@@ -1144,6 +1144,14 @@
 
 				job.allows_synths = !job.allows_synths
 
+			if("sinless_toggle")
+
+				var/E = locate(href_list["job"])
+				var/datum/job/job = E
+				if(!current_business || !job)
+					return
+
+				job.allows_sinless = !job.allows_sinless
 
 			if("set_supervisors")
 

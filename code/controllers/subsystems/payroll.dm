@@ -102,7 +102,7 @@ SUBSYSTEM_DEF(payroll)
 			special_rate = "Vatborn Rate"
 
 	if(SSpersistent_options.get_persistent_option_value("nonpollux_minimum_wage"))
-		if(linked_person.home_system != using_map.starsys_name)
+		if(linked_person.birthplace != using_map.starsys_name)
 			wage = job.get_nonnational_wage()
 			special_rate = "Non-National Rate"
 

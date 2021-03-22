@@ -236,6 +236,8 @@ mob/living/proc/near_camera()
 		return TRACKING_TERMINATE
 	if(istype(loc,/obj/effect/dummy))
 		return TRACKING_TERMINATE
+	if(has_modifier_of_type(/datum/modifier/disable_tracking))
+		return TRACKING_TERMINATE
 
 	 // Now, are they viewable by a camera? (This is last because it's the most intensive check)
 	return near_camera() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE

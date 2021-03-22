@@ -6,7 +6,7 @@
 	S["med_record"]				>> pref.med_record
 	S["sec_record"]				>> pref.sec_record
 	S["gen_record"]				>> pref.gen_record
-	S["home_system"]				>> pref.home_system
+	S["birthplace"]				>> pref.birthplace
 	S["citizenship"]				>> pref.citizenship
 	S["religion"]					>> pref.religion
 	S["economic_status"]			>> pref.economic_status
@@ -20,7 +20,7 @@
 	S["med_record"]				<< pref.med_record
 	S["sec_record"]				<< pref.sec_record
 	S["gen_record"]				<< pref.gen_record
-	S["home_system"]				<< pref.home_system
+	S["birthplace"]				<< pref.birthplace
 	S["citizenship"]				<< pref.citizenship
 	S["religion"]					<< pref.religion
 	S["economic_status"]			<< pref.economic_status
@@ -34,7 +34,7 @@
 	pref.med_record = null
 	pref.sec_record = null
 	pref.gen_record = null
-	pref.home_system = null
+	pref.birthplace = null
 	pref.citizenship = null
 	pref.faction = null
 	pref.religion = null
@@ -49,9 +49,9 @@
 	pref.criminal_status = "None"
 
 /datum/category_item/player_setup_item/general/background/sanitize_character()
-	if(!pref.home_system) pref.home_system = "Vetra"
-	if(!pref.citizenship) pref.citizenship = "Blue Colony"
-	pref.home_system = sanitize_inlist(pref.home_system, home_system_choices, initial(pref.home_system))
+	if(!pref.birthplace) pref.birthplace = "North America"
+	if(!pref.citizenship) pref.citizenship = "Terminus"
+	pref.birthplace = sanitize_inlist(pref.birthplace, birthplace_choices, initial(pref.birthplace))
 	pref.citizenship = sanitize_inlist(pref.citizenship, citizenship_choices, initial(pref.citizenship))
 //	if(!pref.faction)     pref.faction =     "None"
 	if(!pref.religion)    pref.religion =    "None"
@@ -80,7 +80,7 @@
 	character.med_record		= pref.med_record
 	character.sec_record		= pref.sec_record
 	character.gen_record		= pref.gen_record
-	character.home_system		= pref.home_system
+	character.birthplace		= pref.birthplace
 	character.citizenship		= pref.citizenship
 	character.personal_faction	= pref.faction
 	character.religion			= pref.religion
@@ -97,12 +97,12 @@
 
 		. += "<b>Economic Class:</b> [pref.economic_status]<br>"
 		. += "<b>Social Class:</b> <a href='?src=\ref[src];soc_class=1'>[pref.social_class]</a><br/>"
-		. += "<b>Birth System:</b> <a href='?src=\ref[src];home_system=1'>[pref.home_system]</a><br/>"
+		. += "<b>Birth System:</b> <a href='?src=\ref[src];birthplace=1'>[pref.birthplace]</a><br/>"
 
 	else
 		. += "<b>Social Class:</b> [pref.social_class]<br/>"
 		. += "<b>Economic Class:</b> [pref.economic_status]<br>"
-		. += "<b>Birth System:</b> [pref.home_system]<br/>"
+		. += "<b>Birthplace:</b> [pref.birthplace]<br/>"
 
 	. += "Continental Citizenship: <a href='?src=\ref[src];citizenship=1'>[pref.citizenship]</a><br/>"
 //	. += "Faction: <a href='?src=\ref[src];faction=1'>[pref.faction]</a><br/>" // meh do we even use this?
@@ -150,16 +150,16 @@
 			pref.social_class = new_class
 			return TOPIC_REFRESH
 
-	else if(href_list["home_system"])
-		var/choice = input(user, "Please choose a home system.", "Character Preference", pref.home_system) as null|anything in home_system_choices
+	else if(href_list["birthplace"])
+		var/choice = input(user, "Please choose a home system.", "Character Preference", pref.birthplace) as null|anything in birthplace_choices
 		if(!choice || !CanUseTopic(user))
 			return TOPIC_NOACTION
 		if(choice == "Other")
 			var/raw_choice = sanitize(input(user, "Please enter a home system.", "Character Preference")  as text|null, MAX_NAME_LEN)
 			if(raw_choice && CanUseTopic(user))
-				pref.home_system = raw_choice
+				pref.birthplace = raw_choice
 		else
-			pref.home_system = choice
+			pref.birthplace = choice
 		return TOPIC_REFRESH
 
 	else if(href_list["citizenship"])

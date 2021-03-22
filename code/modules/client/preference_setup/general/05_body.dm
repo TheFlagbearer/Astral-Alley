@@ -409,9 +409,13 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	if(LAZYLEN(pref.rlimb_data) && !pref.is_synth())
 		. += "<div class='notice'><b>Warning: A neural framework implant is required to use cybernetic limbs.</b> If you do not have one installed prior to saving your \
 		character, you WILL not be able to control cybernetic limbs, putting you at a significant disadvantage depending on the affected \
-		limbs. You will have to receive an implant during gameplay to use your cybernetic limbs in the future.</div><br>"
+		limbs. You will have to receive an implant during gameplay to use your cybernetic limbs in the future. <b>THIS SETTING CAN ONLY BE CHANGED VIA IN-GAME METHODS ONCE YOUR CHARACTER \
+		HAS BEEN SAVED.</b></div><br>"
 		. += "<b>Neural Framework Implant Installed: </b><br>"
-		. += "<a href='?src=\ref[src];cyber_control=[pref.cyber_control]'><b>[pref.cyber_control ? "Yes" : "No"]</b></a><br>"
+		if(!pref.existing_character)
+			. += "<a href='?src=\ref[src];cyber_control=[pref.cyber_control]'><b>[pref.cyber_control ? "Yes" : "No"]</b></a><br>"
+		else
+			. += "<b>[pref.cyber_control ? "Yes" : "No"]</b><br>"
 
 	if(pref.is_synth())
 		. += "<div class='notice'><b>Warning:</b> You are playing a <b>synthetic</b>. In this universe, synthetics are limited rights and are not \

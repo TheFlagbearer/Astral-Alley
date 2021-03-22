@@ -8,7 +8,8 @@
 	w_class = ITEMSIZE_SMALL
 
 	var/forged = FALSE
-	var/citizenship = "Vetra"	// other options
+	var/citizenship = "Terminus"	// other options
+	var/birthplace = "North America"
 	var/owner = "the owner"
 
 	var/edits_left = 1
@@ -28,11 +29,11 @@
 		to_chat(user, "The holographic seal appears strangely duller than usual.")
 
 /mob/proc/update_passport(var/obj/item/weapon/passport/pass)
-	if(pass.citizenship == "Unset") pass.citizenship = "Vetra" //Defaults unset birth systems to a vetra passport. Otherwise, it will say "X was born in Unset".
+	if(pass.citizenship == "Unset") pass.citizenship = "Terminus" //Defaults unset birth systems to a vetra passport. Otherwise, it will say "X was born in Unset".
 
-	if(pass.citizenship == "Andromeda") pass.icon_state = "androgov_passport"  //Matches icon to location
-	else if(pass.citizenship == "Vetra") pass.icon_state = "polgov_passport"
-	else if(pass.citizenship == "Sol") pass.icon_state = "solgov_passport"
+	if(pass.citizenship == "Keisho") pass.icon_state = "androgov_passport"  //Matches icon to location
+	else if(pass.citizenship == "Terminus") pass.icon_state = "polgov_passport"
+	else if(pass.citizenship == "Elysium") pass.icon_state = "solgov_passport"
 	else if(pass.citizenship == "Cobrastan") pass.icon_state = "cobrastan_passport" //a cheeky little easter egg for fans of Papers, Please
 	else icon_state = "passport"
 
@@ -40,15 +41,16 @@
 
 	if(forged && edits_left)
 		src.owner = sanitize(copytext(input(usr, "Enter your desired name (You can only change this once!)", "Owner Name", null)  as text,1,30))
-		src.citizenship = sanitize(copytext(input(usr, "Enter your desired birthplace (You can only change this once!)", "Birthplace", null)  as text,1,30))
+		src.birthplace = sanitize(copytext(input(usr, "Enter your desired birthplace (You can only change this once!)", "Birthplace", null)  as text,1,30))
+		src.citizenship = sanitize(copytext(input(usr, "Enter your desired citizenship (You can only change this once!)", "Citizenship", null)  as text,1,30))
 		src.name = "[owner]'s passport"
 		if(src.citizenship == "Cobrastan")
 			src.desc = "This is an electronic passport that allows you to travel between colonies. The serial number is 1234-OKOK."
 		user.update_passport(src)
 		edits_left = 0
 	else
-		user.visible_message("\The [user] flashes their passport. It shows that [owner] was born in [citizenship].",\
-			"You flash your passport. It shows that [owner] was born in [citizenship].")
+		user.visible_message("\The [user] flashes their passport. It shows that [owner] was born in [birthplace] and is a citizen of [citizenship].",\
+			"You flash your passport. It shows that [owner] was born in [birthplace] and is a citizen of [citizenship].")
 
 		src.add_fingerprint(user)
 		return
@@ -79,18 +81,19 @@
 		src.registered_user = user
 		src.owner = user.real_name
 		src.name = "[owner]'s temporary passport"
-		src.citizenship = user.mind.prefs.home_system
-		if(src.citizenship == "Unset") src.citizenship = "Vetra"
+		src.citizenship = user.mind.prefs.birthplace
+		if(src.citizenship == "Unset") src.citizenship = "Terminus"
 
 	else if(forged && edits_left)
 		src.owner = sanitize(copytext(input(usr, "Enter your desired name (You can only change this once!)", "Owner Name", null)  as text,1,30))
-		src.citizenship = sanitize(copytext(input(usr, "Enter your desired birthplace (You can only change this once!)", "Birthplace", null)  as text,1,30))
+		src.birthplace = sanitize(copytext(input(usr, "Enter your desired birthplace (You can only change this once!)", "Birthplace", null)  as text,1,30))
+		src.citizenship = sanitize(copytext(input(usr, "Enter your desired citizenship (You can only change this once!)", "Citizenship", null)  as text,1,30))
 		src.name = "[owner]'s temporary passport"
 		edits_left = 0
 
 	else
-		user.visible_message("\The [user] flashes their temporary passport. It shows that [owner] was born in [citizenship].",\
-			"You flash your temporary passport. It shows that [owner] was born in [citizenship].")
+		user.visible_message("\The [user] flashes their temporary passport. It shows that [owner] was born in [birthplace] and is a citizen of [citizenship].",\
+			"You flash your temporary passport. It shows that [owner] was born in [birthplace] and is a citizen of [citizenship].")
 
 		src.add_fingerprint(user)
 		return
@@ -125,12 +128,13 @@
 		src.registered_user = user
 		src.owner = user.real_name
 		src.name = "[owner]'s temporary passport"
-		src.citizenship = user.mind.prefs.home_system
-		if(src.citizenship == "Unset") src.citizenship = "Vetra"
+		src.citizenship = user.mind.prefs.citizenship
+		src.birthplace = user.mind.prefs.birthplace
+		if(src.citizenship == "Unset") src.citizenship = "Terminus"
 		src.source_colony = sanitize(copytext(input(usr, "Enter the colony you represent.", "Representative Colony", null)  as text,1,30))
 	else
-		user.visible_message("\The [user] flashes their diplomatic passport. It shows that [owner] was born in [citizenship]. They are a diplomat for [source_colony]",\
-			"You flash your diplomatic passport. It shows that [owner] was born in [citizenship]. [owner] is a diplomat for [source_colony].")
+		user.visible_message("\The [user] flashes their diplomatic passport. It shows that [owner] was born in [birthplace]. They are a diplomat for [source_colony]",\
+			"You flash your diplomatic passport. It shows that [owner] was born in [birthplace]. [owner] is a diplomat for [source_colony].")
 
 		src.add_fingerprint(user)
 		return
