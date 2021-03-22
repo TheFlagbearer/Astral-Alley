@@ -146,7 +146,8 @@
 /datum/datacore/proc/manifest()
 	spawn()
 		for(var/mob/living/carbon/human/H in player_list)
-			manifest_inject(H)
+			if(!H.mind.prefs.SINless)
+				manifest_inject(H)
 		return
 
 /datum/datacore/proc/manifest_modify(var/name, var/assignment)
