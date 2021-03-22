@@ -1109,7 +1109,7 @@ window "infowindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
-		background-color = #311843
+		background-color = #272727
 		saved-params = "pos;size;is-minimized;is-maximized"
 		title = "Info"
 		titlebar = false
@@ -1118,19 +1118,20 @@ window "infowindow"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 654x494
 	elem "info"
 		type = INFO
 		pos = 0,0
 		size = 632x451
 		anchor1 = 0,0
 		anchor2 = 100,100
-		text-color = #ddabde
-		background-color = #221e21
+		text-color = #ffffff
+		background-color = #272727
 		is-default = true
 		saved-params = ""
 		highlight-color = #c510b7
-		tab-text-color = #e2d318
-		tab-background-color = #2c173e
+		tab-text-color = #ffffff
+		tab-background-color = #101010
 		on-show = ".winset\"rpane.infob.is-visible=true;rpane.browseb.is-visible=true?rpane.infob.pos=130,0:rpane.infob.pos=65,0 rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
 		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.browseb.is-visible=true?rpane.browseb.is-checked=true rpane.rpanewindow.left=browserwindow:rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
 
@@ -1141,13 +1142,15 @@ window "mainwindow"
 		size = 678x462
 		anchor1 = none
 		anchor2 = none
-		background-color = #2d1d34
+		background-color = #272727
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
-		title = "World Server 13"
+		title = "Astral Alley"
 		icon = 'icons\\ws_64.png'
 		macro = "macro"
 		menu = "menu"
+		outer-size = 694x540
+		inner-size = 678x481
 	elem "loocbutton"
 		type = BUTTON
 		pos = 117,440
@@ -1155,7 +1158,7 @@ window "mainwindow"
 		anchor1 = 0,100
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #008040
+		background-color = #1b8a74
 		border = line
 		saved-params = "is-checked"
 		text = "LOOC"
@@ -1168,7 +1171,6 @@ window "mainwindow"
 		size = 54x19
 		anchor1 = 0,100
 		anchor2 = none
-		text-color = #8a378c
 		background-color = #dadada
 		border = line
 		saved-params = "is-checked"
@@ -1182,8 +1184,8 @@ window "mainwindow"
 		size = 53x19
 		anchor1 = 0,100
 		anchor2 = none
-		text-color = #8a378c
-		background-color = #d9ca17
+		text-color = #ffffff
+		background-color = #777777
 		border = line
 		saved-params = "is-checked"
 		text = "Me"
@@ -1197,7 +1199,7 @@ window "mainwindow"
 		anchor1 = 0,100
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #a70c10
+		background-color = #0000cc
 		border = line
 		saved-params = "is-checked"
 		text = "OOC"
@@ -1210,8 +1212,8 @@ window "mainwindow"
 		size = 120x20
 		anchor1 = 100,100
 		anchor2 = none
-		text-color = #ddabde
-		background-color = #402158
+		text-color = #ffffff
+		background-color = #272727
 		saved-params = ""
 		text = "Hotkey Mode"
 		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
@@ -1233,8 +1235,8 @@ window "mainwindow"
 		size = 672x20
 		anchor1 = 0,100
 		anchor2 = 100,100
-		text-color = #e2d318
-		background-color = #65467d
+		text-color = #ffffff
+		background-color = #272727
 		is-default = true
 		border = sunken
 		saved-params = "command"
@@ -1245,7 +1247,7 @@ window "mainwindow"
 		anchor1 = 0,100
 		anchor2 = none
 		text-color = #fffffd
-		background-color = #5454a7
+		background-color = #000000
 		border = line
 		saved-params = "is-checked"
 		text = "Chat"
@@ -1296,6 +1298,7 @@ window "outputwindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1303,6 +1306,7 @@ window "outputwindow"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+		outer-size = 654x494
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
@@ -1322,9 +1326,12 @@ window "popupwindow"
 		size = 120x120
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
 		statusbar = false
+		outer-size = 136x159
+		inner-size = 120x120
 
 window "rpane"
 	elem "rpane"
@@ -1333,7 +1340,7 @@ window "rpane"
 		size = 599x474
 		anchor1 = none
 		anchor2 = none
-		background-color = #402158
+		background-color = #272727
 		border = line
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
@@ -1343,13 +1350,15 @@ window "rpane"
 		can-resize = false
 		is-pane = true
 		transparent-color = #000000
+		outer-size = 613x488
+		inner-size = 599x474
 	elem "rpanewindow"
 		type = CHILD
-		pos = 1,0
+		pos = 0,0
 		size = 599x473
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = #2d1d34
+		background-color = #272727
 		border = line
 		saved-params = "splitter"
 		right = "outputwindow"
@@ -1361,7 +1370,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #65467d
+		background-color = #101010
 		saved-params = "is-checked"
 		text = "GitHub"
 		command = "github"
@@ -1373,7 +1382,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #00aa00
+		background-color = #101010
 		saved-params = "is-checked"
 		text = "Map"
 		command = "map"
@@ -1385,7 +1394,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #00aa00
+		background-color = #ff0000
 		saved-params = "is-checked"
 		text = "Rules"
 		command = "rules"
@@ -1397,7 +1406,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #65467d
+		background-color = #101010
 		saved-params = "is-checked"
 		text = "Changelog"
 		command = "Changelog"
@@ -1408,20 +1417,20 @@ window "rpane"
 		size = 56x16
 		anchor1 = none
 		anchor2 = none
-		text-color = #f2eab7
-		background-color = #65467d
+		text-color = #ffffff
+		background-color = #101010
 		saved-params = "is-checked"
 		text = "Forum"
 		command = "forum"
 		group = "rpanemode"
 	elem "wikib"
 		type = BUTTON
-		pos = 440,0
+		pos = 488,0
 		size = 45x16
 		anchor1 = none
 		anchor2 = none
-		text-color = #c510b7
-		background-color = #f2eab7
+		text-color = #ffffff
+		background-color = #101010
 		saved-params = "is-checked"
 		text = "Wiki"
 		command = "wiki"
@@ -1433,7 +1442,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #795395
+		background-color = #101010
 		is-visible = false
 		saved-params = "is-checked"
 		text = "Text"
@@ -1443,12 +1452,12 @@ window "rpane"
 		button-type = pushbox
 	elem "browseb"
 		type = BUTTON
-		pos = 394,0
+		pos = 432,0
 		size = 56x16
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #65467d
+		background-color = #101010
 		is-visible = false
 		saved-params = "is-checked"
 		text = "Browser"
@@ -1462,7 +1471,7 @@ window "rpane"
 		anchor1 = none
 		anchor2 = none
 		text-color = #f2eab7
-		background-color = #65467d
+		background-color = #101010
 		is-visible = false
 		saved-params = "is-checked"
 		text = "Info"

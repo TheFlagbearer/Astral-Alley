@@ -20,3 +20,16 @@ config/admin_ranks.txt
 !/config/*/*
 config/config.txt
 config/admins.txt
+config/access levels.txt
+config/alienwhitelist.txt
+config/custom_sprites.txt
+config/dbconfig.txt
+config/forumdbconfig.txt
+config/game_options.txt
+config/jobs.txt
+config/mentors.txt
+config/moderators.txt
+config/motd.txt
+config/rules.html
+config/svndir.txt
+config/custom_items.txt
