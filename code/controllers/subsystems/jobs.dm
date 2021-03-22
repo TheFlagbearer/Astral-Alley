@@ -86,6 +86,8 @@ SUBSYSTEM_DEF(jobs)
 			return 0
 		if(player.client.prefs.is_synth() && !job.allows_synths)
 			return 0
+		if(player.client.prefs.SINless && !job.allows_sinless)
+			return 0
 
 		var/position_limit = job.total_positions
 		if(!latejoin)
@@ -132,9 +134,11 @@ SUBSYSTEM_DEF(jobs)
 		if(flag && (!player.client.prefs.be_special & flag))
 			Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 			continue
-
 		if(player.client.prefs.is_synth() && !job.allows_synths)
 			Debug("FOC job does not allow synths, Player: [player]")
+			continue
+		if(player.client.prefs.SINless && !job.allows_sinless)
+			Debug("FOC job does not allow SINless, Player: [player]")
 			continue
 
 		if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
@@ -175,9 +179,11 @@ SUBSYSTEM_DEF(jobs)
 		if(!is_hard_whitelisted(player, job))
 			Debug("GRJ not hard whitelisted failed, Player: [player]")
 			continue
-
 		if(player.client.prefs.is_synth() && !job.allows_synths)
 			Debug("GRJ job does not allow synths, Player: [player]")
+			continue
+		if(player.client.prefs.SINless && !job.allows_sinless)
+			Debug("GRJ job does not allow SINless, Player: [player]")
 			continue
 
 		if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
@@ -333,9 +339,11 @@ SUBSYSTEM_DEF(jobs)
 				if((player.client.prefs.criminal_status == "Incarcerated") && job.title != "Prisoner") //CASSJUMP
 					Debug("DO player is prisoner, Player: [player], Job:[job.title]")
 					continue
-
 				if(player.client.prefs.is_synth() && !job.allows_synths)
 					Debug("DO job does not allow synths, Player: [player]")
+					continue
+				if(player.client.prefs.SINless && !job.allows_sinless)
+					Debug("DO job does not allow SINless, Player: [player]")
 					continue
 
 				// If the player wants that job on this level, then try give it to him.
@@ -687,8 +695,8 @@ SUBSYSTEM_DEF(jobs)
 				C.associated_account_number = H.mind.initial_account.account_number
 				C.associated_pin_number = H.mind.initial_account.remote_access_pin
 
-		H.equip_to_slot_or_del(C, slot_wear_id)
-
+		if((!H.mind.prefs.SINless) || job.allows_sinless)
+			H.equip_to_slot_or_del(C, slot_wear_id)
 
 		//if you're a business owner, you get all the accesses your business has no matter what job you choose.
 		var/datum/business/B = get_business_by_owner_uid(H.mind.prefs.unique_id)

@@ -42,6 +42,7 @@
 	var/nonnational_wage = null			// if set to null, it defaults non-polluxians pay to normal wage. if 0 and over, they are paid this wage
 
 	var/allows_synths = TRUE
+	var/allows_sinless = FALSE
 
 	var/portal_whitelist = null // id of persistent option. only works if hard_whitelisted and this id is valid to a select_person portal option
 
@@ -261,6 +262,7 @@
 		dat += "<br>You need a <b>clean criminal record</b> to work in this job.</b>"
 
 	dat += "<br>Synthetics <b>[allows_synths ? "may" : "may not"]</b> apply to work in this job.</b>"
+	dat += "<br>SINless entities <b>[allows_sinless ? "may" : "may not"]</b> apply to work in this job.</b>"
 
 	return dat
 

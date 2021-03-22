@@ -13,6 +13,7 @@
 	hide_on_manifest = 0
 	wage = 5 // Ha-ha poor people (tm)
 	synth_wage = 0 // no payment for you
+	allows_sinless = TRUE
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
 	outfit_type = /decl/hierarchy/outfit/job/assistant
@@ -51,6 +52,7 @@
 	selection_color = "#515151"
 	wage = 0 // oof
 	outfit_type = /decl/hierarchy/outfit/job/civilian/prisoner
+	allows_sinless = TRUE
 
 	description = "You find yourself behind bars in the colony with no means of escape. How did you get here? There's not much to do as a prisoner \
 	but it's not forever. Hire a lawyer to try get yourself out of there, or attempt to get on the police's good side so they give you a lighter \
