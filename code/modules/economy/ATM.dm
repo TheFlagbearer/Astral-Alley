@@ -505,3 +505,8 @@ log transactions
 		human_user.put_in_hands(E)
 	E.worth = sum
 	E.owner_name = authenticated_account.owner_name
+	//Metadata for forensic accountants
+	E.metadata += "Owner Name: [authenticated_account.owner_name]"
+	E.metadata += "Creation Date: [GLOB.current_date_string]"
+	E.metadata += "Creation Time: [stationtime2text()]"
+	E.metadata += "Terminal ID: [machine_id]"

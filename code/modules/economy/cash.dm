@@ -1,5 +1,5 @@
 /obj/item/weapon/spacecash
-	name = "0 credit chip"
+	name = "0 credit bill"
 	desc = "It's worth 0 credits."
 	gender = PLURAL
 	icon = 'icons/obj/cash.dmi'
@@ -52,7 +52,7 @@
 		qdel(src)
 
 /obj/item/weapon/spacecash/bundle
-	name = "credit chips"
+	name = "credit bills"
 	icon_state = ""
 	gender = PLURAL
 	desc = "They are worth 0 credits."
@@ -117,37 +117,37 @@
 		qdel(src)
 
 /obj/item/weapon/spacecash/bundle/c1
-	name = "1 credit chip"
+	name = "1 credit bill"
 	icon_state = "1"
 	desc = "It's worth 1 credit."
 	worth = 1
 
 /obj/item/weapon/spacecash/bundle/c5
-	name = "5 credit chip"
+	name = "5 credit bill"
 	icon_state = "5"
 	desc = "It's worth 5 credits."
 	worth = 5
 
 /obj/item/weapon/spacecash/bundle/c10
-	name = "10 credit chip"
+	name = "10 credit bill"
 	icon_state = "10"
 	desc = "It's worth 10 credits."
 	worth = 10
 
 /obj/item/weapon/spacecash/bundle/c20
-	name = "20 credit chip"
+	name = "20 credit bill"
 	icon_state = "20"
 	desc = "It's worth 20 credits."
 	worth = 20
 
 /obj/item/weapon/spacecash/bundle/c50
-	name = "50 credit chip"
+	name = "50 credit bill"
 	icon_state = "50"
 	desc = "It's worth 50 credits."
 	worth = 50
 
 /obj/item/weapon/spacecash/bundle/c100
-	name = "100 credit chip"
+	name = "100 credit bill"
 	icon_state = "100"
 	desc = "It's worth 100 credits."
 	worth = 100
@@ -180,18 +180,57 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	return
 
 /obj/item/weapon/spacecash/ewallet
-	name = "Charge card"
-	icon_state = "efundcard"
-	desc = "A card that holds an amount of money."
+	name = "credit shard"
+	icon_state = "holochip_giga-color"
+	desc = "A modern replacement for physical money that can be directly converted to virtual currency and viceversa. Keep away from magnets."
 	var/owner_name = "" //So the ATM can set it so the EFTPOS can put a valid name on transactions.
+	var/list/metadata = list() //Some metadata that any forensic accountants can use to track down the owner of a credit shard
 
-	unique_save_vars = list("owner_name", "worth")
+	unique_save_vars = list("owner_name", "worth", "metadata")
+
+/obj/item/weapon/spacecash/ewallet/update_icon()
+	var/rounded_credits
+	var/overlay_color
+	switch(worth)
+		if(0 to (1e3 - 1))
+			rounded_credits = round(worth)
+		if(1e3 to (1e6 - 1))
+			rounded_credits = round(worth * 1e-3)
+		if(1e6 to (1e9 - 1))
+			rounded_credits = round(worth * 1e-6)
+		if(1e9 to INFINITY)
+			rounded_credits = round(worth * 1e-9)
+
+	switch(rounded_credits)
+		if(0 to 4)
+			overlay_color = "#8E2E38"
+		if(5 to 9)
+			overlay_color = "#914792"
+		if(10 to 19)
+			overlay_color = "#BF5E0A"
+		if(20 to 49)
+			overlay_color = "#358F34"
+		if(50 to 99)
+			overlay_color = "#676767"
+		if(100 to 199)
+			overlay_color = "#009D9B"
+		if(200 to 499)
+			overlay_color = "#0153C1"
+		if(500 to INFINITY)
+			overlay_color = "#2C2C2C"
+
+	var/image/credit_overlay
+
+	overlays.Cut()
+
+	credit_overlay = image('icons/obj/cash.dmi', icon_state = "holochip_giga")
+	credit_overlay.color = overlay_color
+	overlays += credit_overlay
 
 /obj/item/weapon/spacecash/ewallet/examine(mob/user)
 	..(user)
 	if (!(user in view(2)) && user!=src.loc) return
-	to_chat(user, "<span class='notice'>Charge card's owner: [src.owner_name]. </span>")
-	to_chat(user, "<span class='notice'>Credit chips remaining: [src.worth]. </span>")
+	to_chat(user, "<span class='notice'>Credits remaining: [src.worth]. </span>")
 
 /obj/item/weapon/spacecash/ewallet/lotto
 	name = "space lottery card"
