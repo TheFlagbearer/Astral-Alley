@@ -301,3 +301,7 @@ the artifact triggers the rage.
 	if(!L.is_sentient())
 		return FALSE // Cannot affect drones.
 	return TRUE
+
+/datum/modifier/disable_tracking
+	name = "tracking disabled"
+	desc = "You are invisible from cameras for a short period of time."

@@ -652,6 +652,8 @@ SUBSYSTEM_DEF(jobs)
 
 	spawnId(H, rank, alt_title)
 
+	//Gives the SINless their camera evasion abilities
+	disable_sinless_tracking(H)
 
 	BITSET(H.hud_updateflag, ID_HUD)
 	BITSET(H.hud_updateflag, IMPLOYAL_HUD)
@@ -878,3 +880,8 @@ SUBSYSTEM_DEF(jobs)
 		active_popo += police_officer.get_active()
 
 	return active_popo
+
+/datum/controller/subsystem/jobs/proc/disable_sinless_tracking(var/mob/living/carbon/human/H)
+	if((!H.mind) || (!H.mind.prefs) || !H.mind.prefs.SINless) return
+
+	H.add_modifier(/datum/modifier/disable_tracking)
