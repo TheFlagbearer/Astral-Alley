@@ -273,6 +273,10 @@ log transactions
 			if("change_security_level")
 				if(authenticated_account)
 					var/new_sec_level = max( min(text2num(href_list["new_security_level"]), 2), 0)
+					if(new_sec_level == 2)
+						switch(alert("Raising your security level to 2 will require the use of an ID card. If you lose your ID card or do not have one, you WILL lose access to your bank account! Are you sure you want to do this?", "Security Alert", "Yes", "No"))
+							if("No")
+								return
 					authenticated_account.security_level = new_sec_level
 					log_money(usr, "changed bank security level to [authenticated_account.security_level]", authenticated_account.account_number, authenticated_account.owner_name, 0)
 			if("attempt_auth")
