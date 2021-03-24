@@ -57,6 +57,7 @@
 #define MATERIAL_PAINITE				 "painite"
 #define MATERIAL_VOID_OPAL				 "void opal"
 #define MATERIAL_RUTILE					 "rutile"
+#define MATERIAL_ASTRALITE				 "astralite"
 
 //woods
 #define MATERIAL_WOOD                    "wood"

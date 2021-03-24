@@ -32,7 +32,9 @@
 	icon_state = "brick_paving"
 	initial_flooring = /decl/flooring/pavement/brick_paving
 
-
+/turf/simulated/floor/pavement/sewer
+	icon_state = "dark"
+	initial_flooring = /decl/flooring/pavement/sewer
 
 
 /turf/simulated/floor/road

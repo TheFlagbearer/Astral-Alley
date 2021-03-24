@@ -901,3 +901,18 @@ var/list/name_to_material
 	sheet_plural_name = "ingots"
 	worth = 1.2
 	icon_colour = COLOR_GRAY
+
+/material/astralite
+	name = "astralite"
+	display_name = "astralite"
+	use_name = "astralite"
+	stack_type = /obj/item/stack/material/astralite
+	sheet_singular_name = "ingot"
+	sheet_plural_name = "ingots"
+	worth = 20
+	icon_colour = "#c94000"
+	stack_origin_tech = list(TECH_ARCANE = 2, TECH_MATERIAL = 7)
+	icon_base = "solid"
+	weight = 15
+	hardness = 40
+	conductivity = 77

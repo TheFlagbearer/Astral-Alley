@@ -643,3 +643,12 @@
 	apply_colour = 1
 	no_variants = FALSE
 	stack_color = COLOR_GRAY
+
+/obj/item/stack/material/astralite
+	name = "astralite"
+	icon_state = "sheet-ingot"
+	singular_name = "astralite ingot"
+	default_type = MATERIAL_ASTRALITE
+	apply_colour = 1
+	no_variants = FALSE
+	stack_color = "#c94000"
