@@ -10,6 +10,7 @@
 	var/health = 100
 	var/maxhealth = 100
 	anchored = 1.0
+	var/slowdown_relieved // This is used to store the movement cost for the tile the catwalk is built on.
 
 /obj/structure/catwalk/initialize()
 	. = ..()
@@ -21,8 +22,15 @@
 			return INITIALIZE_HINT_QDEL
 	update_icon()
 
+	var/turf/T = get_turf(src)
+	if(T && T.movement_cost)
+		slowdown_relieved = T.movement_cost
+		T.movement_cost = 0
+
 /obj/structure/catwalk/Destroy()
 	var/turf/location = loc
+	if(slowdown_relieved)
+		location.movement_cost = slowdown_relieved
 	. = ..()
 	location.alpha = initial(location.alpha)
 	for(var/obj/structure/catwalk/L in orange(location, 1))

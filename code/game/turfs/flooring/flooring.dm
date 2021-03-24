@@ -537,6 +537,9 @@ var/list/flooring_types
 	icon_base = "pave_stairs"
 	build_type = /obj/item/stack/tile/brick_paving
 
+/decl/flooring/pavement/sewer
+	icon_base = "dark"
+
 /decl/flooring/road
 	icon = 'icons/turf/roads.dmi'
 	icon_base = "road"
