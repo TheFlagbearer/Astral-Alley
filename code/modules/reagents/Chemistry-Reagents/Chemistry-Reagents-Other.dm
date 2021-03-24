@@ -774,3 +774,67 @@
 				to_chat(blob_client, span("warning", "You feel the last vestiges of your consciousness being overwritten and slipping away..."))
 				C.gib()
 				new /obj/structure/blob/core/grey_goo(location, blob_client, 1, 0) //Come back to this and fix it. Mind not transferring properly.
+
+// Liquid form of Astralite - Pure pieces of creation
+/datum/reagent/astralite
+	name = "Astralite"
+	id = "astralite"
+	description = "A stabilized form of astralite. It has many uses. Some good. Some bad."
+	taste_description = "something indescribable"
+	reagent_state = LIQUID
+	color = "#c94000"
+	metabolism = REM * 1.5 // 0.3 removed per tick.
+
+/datum/reagent/astralite/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) // May or may not be unbalanced but the only way to know is through testing.
+
+	//Every tick - ONE of these effects will occur. If you're lucky, you'll survive. If you're unlucky you'll be very warm for the rest of your short life.
+	var/luck_of_the_draw = rand(1,5)
+
+	switch(luck_of_the_draw)
+		if(1) // Fucking kills you in the most horrific way possible because fuck you.
+			M.take_organ_damage(2 * removed, 2 * removed)
+			M.adjustOxyLoss(4 * removed)
+			M.adjustToxLoss(2 * removed)
+			M.adjustCloneLoss(2 * removed)
+			M.adjustFireLoss(3 * removed)
+			if(M.fire_stacks <= 1.5)
+				M.adjust_fire_stacks(0.15)
+			if(prob(10))
+				to_chat(M,"<span class='warning'>Your veins feel like they're on fire!</span>")
+				M.adjust_fire_stacks(0.1)
+			else if(prob(5))
+				M.IgniteMob()
+				to_chat(M,"<span class='critical'>Some of your veins rupture, the exposed blood igniting!</span>")
+		if(2) // Acts as unstable mutagen. It's reality warping abilities allow genetic-type changes even for synthetics.
+			var/mob/living/carbon/human/H = M
+			if(istype(H) && (H.species.flags & NO_SCAN))
+				return
+
+			if(M.dna)
+				if(prob(removed * 10))
+					randmuti(M)
+					if(prob(98))
+						randmutb(M)
+					else
+						randmutg(M)
+					domutcheck(M, null)
+					M.UpdateAppearance()
+				if(prob(removed * 40))
+					randmuti(M)
+					M << "<span class='warning'>You feel odd!</span>"
+			M.apply_effect(10 * removed, IRRADIATE, 0)
+		if(3) // Very potent healing. Bless RNGesus.
+			M.heal_organ_damage(2 * removed, 2 * removed)
+			M.adjustOxyLoss(-4 * removed)
+			M.adjustToxLoss(-2 * removed)
+			M.adjustCloneLoss(-2 * removed)
+		if(4) // Insanity
+			var/drug_strength = 120
+			M.emote(pick("scream", "moan", "twitch", "groan", "twitch_s", "vomit", "shiver", "stare", "pale"))
+			M.adjustBrainLoss(0.30)
+			M.hallucination = max(M.hallucination, drug_strength)
+			M.druggy = max(M.druggy, drug_strength)
+			if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
+				step(M, pick(cardinal))
+		if(5) // Gives some insight towards redspace related stuff. Come back to this later when Redspace is done.
+			to_chat(M, span("warning", "Wooo! Spooky ghosts!"))

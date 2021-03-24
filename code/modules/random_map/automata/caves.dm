@@ -35,7 +35,7 @@
 		if(!priority_process) sleep(-1)
 		var/check_cell = pick(ore_turfs)
 		ore_turfs -= check_cell
-		if(prob(75))
+		if(prob(95))
 			map[check_cell] = DOOR_CHAR  // Mineral block
 		else
 			map[check_cell] = EMPTY_CHAR // Rare mineral block.

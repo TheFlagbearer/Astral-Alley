@@ -123,6 +123,11 @@
 	icon_state = "rose_quartz"
 	material = "rose quartz"
 
+/obj/item/weapon/ore/astralite
+	name = "raw astralite"
+	desc = "An unrefined piece of The Fundament."
+	material = "ore_astralite"
+	icon_state = "ore_astralite"
 
 /obj/item/weapon/ore/New()
 	pixel_x = rand(0,16)-8

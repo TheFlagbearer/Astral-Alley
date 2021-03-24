@@ -92,3 +92,10 @@
 	icon_state = "destroyed"
 	interaction_message = "<span class='notice'>This turret has seen better days. It looks like any useful components have been stripped from it, leaving only \
 	damaged wiring and a chassis useful only for melting down.</span>"
+
+/obj/structure/prop/tech/holomap
+	name = "holographic terrain map"
+	desc = "A map that displays geographical data."
+	icon = 'icons/obj/props/holomap.dmi'
+	icon_state = "holomap"
+	interaction_message = "<span class='notice'>The information on the map seems to be related to the local area.</span>"

@@ -204,3 +204,12 @@ var/global/list/ore_data = list()
 	spread_chance = 1
 	ore = /obj/item/weapon/ore/void_opal
 	scan_icon = "mineral_rare"
+
+/ore/astralite
+	name = "astralite"
+	display_name = "raw astralite"
+	alloy = 1
+	result_amount = 1
+	spread_chance = 1
+	ore = /obj/item/weapon/ore/astralite
+	scan_icon = "mineral_rare"
