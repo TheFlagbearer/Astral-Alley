@@ -1,7 +1,7 @@
 /turf/simulated/floor/outdoors/dirt
 	name = "dirt"
-	desc = "Quite dirty!"
-	icon_state = "dirt-dark"
+	desc = "There's alot of this stuff nowadays."
+	icon_state = "dirt"
 	edge_blending_priority = 2
 	turf_layers = list(/turf/simulated/floor/outdoors/rocks)
 	initial_flooring = /decl/flooring/dirt
@@ -38,5 +38,29 @@
 			new grass_type(src)
 	. = ..()
 
+//OoP overload
 /turf/simulated/floor/outdoors/dirt/indoors
 	outdoors = 0
+
+/turf/simulated/floor/outdoors/dirt/indoors/nogrowth
+	tree_chance = 0
+	grass_chance = 0
+
+/turf/simulated/floor/outdoors/dirt/nogrowth
+	tree_chance = 0
+	grass_chance = 0
+
+/turf/simulated/floor/outdoors/dirt/grassy
+	icon_state = "grassy_dirt"
+	desc = "A few tufts of plant life poke up from the ground. They don't look too healthy."
+
+/turf/simulated/floor/outdoors/dirt/grassy/indoors
+	outdoors = 0
+
+/turf/simulated/floor/outdoors/dirt/grassy/nogrowth
+	tree_chance = 0
+	grass_chance = 0
+
+/turf/simulated/floor/outdoors/dirt/grassy/indoors/nogrowth
+	tree_chance = 0
+	grass_chance = 0
