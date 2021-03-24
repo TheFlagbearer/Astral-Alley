@@ -592,3 +592,13 @@ var/list/flooring_types
 /decl/flooring/glass_bottom
 	icon = 'icons/turf/flooring/misc.dmi'
 	icon_base = "glass_bottom"
+
+/decl/flooring/lunar
+	icon = 'icons/turf/moon.dmi'
+	icon_base = "asteroid"
+	has_base_range = 12
+
+/decl/flooring/martian
+	icon = 'icons/turf/mars.dmi'
+	icon_base = "asteroid"
+	has_base_range = 12

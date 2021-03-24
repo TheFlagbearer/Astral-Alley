@@ -17,7 +17,7 @@
 	interaction_message = "<span class='notice'>An old, dilapidated vending machine. Whatever delicious snacks or drinks it once held are now gone.</span>"
 	var/stored_money = 0
 
-/obj/structure/prop/misc/vending/machine/attackby(obj/item/I as obj, mob/living/user as mob)
+/obj/structure/prop/misc/vending_machine/attackby(obj/item/I as obj, mob/living/user as mob)
 	if(istype(I, /obj/item/weapon/spacecash))
 		var/obj/item/weapon/spacecash/C = I
 		stored_money += C.worth

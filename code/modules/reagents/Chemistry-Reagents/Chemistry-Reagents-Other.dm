@@ -829,6 +829,7 @@
 			M.adjustToxLoss(-2 * removed)
 			M.adjustCloneLoss(-2 * removed)
 		if(4) // Insanity
+			var/drug_strength = 120
 			M.emote(pick("scream", "moan", "twitch", "groan", "twitch_s", "vomit", "shiver", "stare", "pale"))
 			M.adjustBrainLoss(0.30)
 			M.hallucination = max(M.hallucination, drug_strength)
