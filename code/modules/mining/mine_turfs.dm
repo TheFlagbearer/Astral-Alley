@@ -61,6 +61,7 @@ var/list/mining_overlay_cache = list()
 
 	var/mineral_chance = 10
 
+	var/flooring_icon = 'icons/turf/flooring/asteroid.dmi'
 /turf/simulated/mineral/ignore_mapgen
 	ignore_mapgen = 1
 
@@ -136,15 +137,15 @@ var/list/mining_overlay_cache = list()
 			name = "rock"
 
 		icon = 'icons/turf/walls.dmi'
-		icon_state = "rock"
+		icon_state = initial(icon_state)
 
 		for(var/direction in cardinal)
 			var/turf/T = get_step(src,direction)
 			if(istype(T) && !T.density)
 				var/place_dir = turn(direction, 180)
-				if(!mining_overlay_cache["rock_side_[place_dir]"])
-					mining_overlay_cache["rock_side_[place_dir]"] = image('icons/turf/walls.dmi', "rock_side", dir = place_dir)
-				T.overlays += mining_overlay_cache["rock_side_[place_dir]"]
+				if(!mining_overlay_cache["[initial(icon_state)]_side_[place_dir]"])
+					mining_overlay_cache["[initial(icon_state)]_side_[place_dir]"] = image('icons/turf/walls.dmi', "[initial(icon_state)]_side", dir = place_dir)
+				T.overlays += mining_overlay_cache["[initial(icon_state)]_side_[place_dir]"]
 
 			if(archaeo_overlay)
 				overlays += archaeo_overlay
@@ -154,18 +155,18 @@ var/list/mining_overlay_cache = list()
 	else
 
 		name = "sand"
-		icon = 'icons/turf/flooring/asteroid.dmi'
+		icon = flooring_icon
 		icon_state = "asteroid"
 
 		if(sand_dug)
 			if(!mining_overlay_cache["dug_overlay"])
-				mining_overlay_cache["dug_overlay"] = image('icons/turf/flooring/asteroid.dmi', "dug_overlay")
+				mining_overlay_cache["dug_overlay"] = image(flooring_icon, "dug_overlay")
 			overlays += mining_overlay_cache["dug_overlay"]
 
 		for(var/direction in cardinal)
 			if(istype(get_step(src, direction), /turf/space) && !istype(get_step(src, direction), /turf/space/cracked_asteroid))
 				if(!mining_overlay_cache["asteroid_edge_[direction]"])
-					mining_overlay_cache["asteroid_edge_[direction]"] = image('icons/turf/flooring/asteroid.dmi', "asteroid_edges", dir = direction)
+					mining_overlay_cache["asteroid_edge_[direction]"] = image(flooring_icon, "asteroid_edges", dir = direction)
 				overlays += mining_overlay_cache["asteroid_edge_[direction]"]
 			else
 				var/turf/simulated/mineral/M = get_step(src, direction)
@@ -595,26 +596,66 @@ var/list/mining_overlay_cache = list()
 		return
 
 	var/mineral_name
-	if(z < 6)
-		if(rare_ore)
-			mineral_name = pickweight(list("uranium" = 15, "platinum" = 15, "hematite" = 15, "carbon" = 15, "diamond" = 5, "gold" = 25, "silver" = 25, "phoron" = 10, "rose quartz" = 10, "painite" = 7, "quartz" = 15, "bauxite" = 18, "rutile" = 13, "copper" = 18, "tin" = 18))
+	if(rare_ore)
+		mineral_name = pickweight(list("uranium" = 15, "platinum" = 15, "hematite" = 15, "carbon" = 15, "diamond" = 5, "gold" = 25, "silver" = 25, "phoron" = 10, "rose quartz" = 10, "painite" = 7, "quartz" = 15, "bauxite" = 18, "rutile" = 13, "copper" = 18, "tin" = 18))
 
-		else
-			mineral_name = pickweight(list("uranium" = 5, "platinum" = 5, "hematite" = 35, "carbon" = 35, "diamond" = 3, "gold" = 5, "silver" = 5, "phoron" = 5, "rose quartz" = 5, "painite" = 5, "quartz" = 8, "bauxite" = 30, "rutile" = 30, "copper" = 30, "tin" = 30))
-	if(z < 8)
-		if(rare_ore)
-			mineral_name = pickweight(list("uranium" = 15, "platinum" = 15, "hematite" = 15, "carbon" = 15, "diamond" = 5, "gold" = 25, "silver" = 25, "bauxite" = 18, "rutile" = 13, "copper" = 18, "tin" = 18))
-
-		else
-			mineral_name = pickweight(list("uranium" = 5, "platinum" = 5, "hematite" = 35, "carbon" = 35, "gold" = 5, "silver" = 5, "quartz" = 8, "bauxite" = 30, "rutile" = 30, "copper" = 30, "tin" = 30))
 	else
-		if(rare_ore)
-			mineral_name = pickweight(list("diamond" = 3, "phoron" = 3, "void opal" = 2))
-
-		else
-			mineral_name = pickweight(list("astralite" = 1, "diamond" = 1, "phoron" = 1, "void opal" = 1))
+		mineral_name = pickweight(list("uranium" = 5, "platinum" = 5, "hematite" = 35, "carbon" = 35, "diamond" = 3, "gold" = 5, "silver" = 5, "phoron" = 5, "rose quartz" = 5, "painite" = 5, "quartz" = 8, "bauxite" = 30, "rutile" = 30, "copper" = 30, "tin" = 30))
 
 	if(mineral_name && (mineral_name in ore_data))
 		mineral = ore_data[mineral_name]
 		UpdateMineral()
 	update_icon()
+
+//Non-Baseline mineral walls
+/turf/simulated/mineral/lunar
+	icon_state = "rock-lunar"
+	flooring_icon = 'icons/turf/moon.dmi'
+
+/turf/simulated/mineral/lunar/ignore_mapgen
+	ignore_mapgen = 1
+
+/turf/simulated/mineral/impassable/lunar
+	icon_state = "rock-lunar"
+
+/turf/simulated/mineral/lunar/make_ore(var/rare_ore)
+	if(mineral)
+		return
+
+	var/mineral_name
+	if(rare_ore)
+		mineral_name = pickweight(list("uranium" = 15, "platinum" = 15, "hematite" = 15, "carbon" = 15, "diamond" = 5, "gold" = 25, "silver" = 25, "bauxite" = 18, "rutile" = 13, "copper" = 18, "tin" = 18))
+
+	else
+		mineral_name = pickweight(list("uranium" = 5, "platinum" = 5, "hematite" = 35, "carbon" = 35, "gold" = 5, "silver" = 5, "quartz" = 8, "bauxite" = 30, "rutile" = 30, "copper" = 30, "tin" = 30))
+
+	if(mineral_name && (mineral_name in ore_data))
+		mineral = ore_data[mineral_name]
+		UpdateMineral()
+	update_icon()
+
+/turf/simulated/mineral/redspace
+	icon_state = "rock-redspace"
+
+/turf/simulated/mineral/redspace/ignore_mapgen
+	ignore_mapgen = 1
+
+/turf/simulated/mineral/impassable/redspace
+	icon_state = "rock-redspace"
+
+/turf/simulated/mineral/redspace/make_ore(var/rare_ore)
+	if(mineral)
+		return
+
+	var/mineral_name
+	if(rare_ore)
+		mineral_name = pickweight(list("diamond" = 3, "phoron" = 3, "void opal" = 2))
+
+	else
+		mineral_name = pickweight(list("astralite" = 1, "diamond" = 1, "phoron" = 1, "void opal" = 1))
+
+	if(mineral_name && (mineral_name in ore_data))
+		mineral = ore_data[mineral_name]
+		UpdateMineral()
+	update_icon()
+

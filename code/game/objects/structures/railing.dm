@@ -327,3 +327,9 @@
 			if(S.climbable) continue
 		if(O && O.density && !(O.flags & ON_BORDER && !(turn(O.dir, 180) & dir)))
 			return O
+
+/obj/structure/railing/emergency
+	name = "safety railing"
+	maxhealth = 200
+	health = 200
+	color = "#CCC000"

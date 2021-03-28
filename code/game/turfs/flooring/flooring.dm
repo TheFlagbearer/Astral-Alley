@@ -602,3 +602,18 @@ var/list/flooring_types
 	icon = 'icons/turf/mars.dmi'
 	icon_base = "asteroid"
 	has_base_range = 12
+
+/decl/flooring/redspace
+	icon = 'icons/turf/outdoors.dmi'
+	icon_base = "basalt"
+	has_base_range = 12
+
+/decl/flooring/wasteland
+	icon = 'icons/turf/floors.dmi'
+	icon_base = "wasteland"
+	has_base_range = 12
+
+/decl/flooring/flesh
+	icon = 'icons/turf/floors.dmi'
+	icon_base = "necro"
+	has_base_range = 3
