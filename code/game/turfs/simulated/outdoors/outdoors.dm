@@ -33,10 +33,14 @@ var/list/turf_edge_cache = list()
 	return ..()
 
 /turf/simulated/proc/make_outdoors()
+	if(outdoors)
+		return
 	outdoors = TRUE
 	SSplanets.addTurf(src)
 
 /turf/simulated/proc/make_indoors()
+	if(!outdoors)
+		return
 	outdoors = FALSE
 	SSplanets.removeTurf(src)
 
@@ -105,6 +109,12 @@ var/list/turf_edge_cache = list()
 
 /turf/simulated/floor/outdoors/rocks/caves
 	outdoors = FALSE
+
+/turf/simulated/floor/outdoors/rocks/dark
+	icon_state = "rock_dark"
+
+/turf/simulated/floor/outdoors/rocks/caves/dark
+	icon_state = "rock_dark"
 
 // This proc adds a 'layer' on top of the turf.
 /turf/simulated/floor/outdoors/proc/promote(var/new_turf_type)

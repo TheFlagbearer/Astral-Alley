@@ -2931,6 +2931,6 @@
 #include "maps\submaps\surface_submaps\wilderness\wilderness.dm"
 #include "maps\submaps\surface_submaps\wilderness\wilderness_areas.dm"
 #include "maps\terminus\terminus.dm"
-#include "maps\terminus\turfs\lunar.dm"
+#include "maps\terminus\turfs\terminus-turfs.dm"
 #include "maps\~map_system\maps.dm"
 // END_INCLUDE

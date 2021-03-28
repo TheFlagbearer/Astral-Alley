@@ -222,17 +222,17 @@ var/datum/planet/pollux/planet_pollux = null
 
 //	outdoor_sounds_type = /datum/looping_sound/weather/outside_snow
 //	indoor_sounds_type = /datum/looping_sound/weather/inside_snow
-
+/*
 /datum/weather/pollux/snow/process_effects()
 	..()
-	for(var/turf/simulated/floor/outdoors/snow/S in SSplanets.new_outdoor_turfs) //This didn't make any sense before SSplanets, either
+	for(var/turf/simulated/floor/outdoors/snow/S as anything in SSplanets.new_outdoor_turfs) //This didn't make any sense before SSplanets, either
 		if(S.z in holder.our_planet.expected_z_levels)
 			for(var/dir_checked in cardinal)
 				var/turf/simulated/floor/T = get_step(S, dir_checked)
 				if(istype(T))
 					if(istype(T, /turf/simulated/floor/outdoors) && prob(33))
 						T.chill()
-
+*/
 /datum/weather/pollux/blizzard
 	name = "blizzard"
 	icon_state = "snowfall_heavy"
@@ -256,16 +256,17 @@ var/datum/planet/pollux/planet_pollux = null
 
 //	outdoor_sounds_type = /datum/looping_sound/weather/outside_blizzard
 //	indoor_sounds_type = /datum/looping_sound/weather/inside_blizzard
-
+/*
 /datum/weather/pollux/blizzard/process_effects()
 	..()
-	for(var/turf/simulated/floor/outdoors/snow/S in SSplanets.new_outdoor_turfs) //This didn't make any sense before SSplanets, either
+	for(var/turf/simulated/floor/outdoors/snow/S as anything in SSplanets.new_outdoor_turfs) //This didn't make any sense before SSplanets, either
 		if(S.z in holder.our_planet.expected_z_levels)
 			for(var/dir_checked in cardinal)
 				var/turf/simulated/floor/T = get_step(S, dir_checked)
 				if(istype(T))
 					if(istype(T, /turf/simulated/floor/outdoors) && prob(50))
 						T.chill()
+*/
 
 /datum/weather/pollux/rain
 	name = "rain"
@@ -291,26 +292,22 @@ var/datum/planet/pollux/planet_pollux = null
 
 /datum/weather/pollux/rain/process_effects()
 	..()
-	for(var/mob/living/L in living_mob_list)
+	for(var/mob/living/L as anything in living_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
 			if(!T.outdoors)
 				continue // They're indoors, so no need to rain on them.
 
-/*			// If they have an open umbrella, it'll guard from rain
-			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
-				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
-				if(U.open)
-					if(show_message)
-						effect_message = "<span class='notice'>Rain patters softly onto your umbrella</span>")
-					continue
-			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
-				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
-				if(U.open)
-					if(show_message)
-						effect_message = "<span class='notice'>Rain patters softly onto your umbrella</span>")
-					continue
-*/
+			// If they have an open umbrella, it'll guard from rain
+			var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+			if(!istype(U) || !U.open)
+				U = L.get_inactive_hand()
+
+			if(istype(U) && U.open)
+				if(show_message)
+					to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella.</span>")
+				continue
+
 			L.water_act(1)
 			if(show_message)
 				to_chat(L, effect_message)
@@ -344,27 +341,20 @@ var/datum/planet/pollux/planet_pollux = null
 
 /datum/weather/pollux/storm/process_effects()
 	..()
-	for(var/mob/living/L in living_mob_list)
+	for(var/mob/living/L as anything in living_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
 			if(!T.outdoors)
 				continue // They're indoors, so no need to rain on them.
 
-			// Lazy wind code
-			if(prob(10))
-				if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
-					var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
-					if(U.open)
-						to_chat(L, "<span class='danger'>You struggle to keep hold of your umbrella!</span>")
-						playsound(L, 'sound/effects/rustle1.ogg', 100, 1)	// Closest sound I've got to "Umbrella in the wind"
-				else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
-					var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
-					if(U.open)
-						to_chat(L, "<span class='danger'>A gust of wind yanks the umbrella from your hand!</span>")
-						playsound(L, 'sound/effects/rustle1.ogg', 100, 1)
-						L.drop_from_inventory(U)
-						U.toggle_umbrella()
-						U.throw_at(get_edge_target_turf(U, pick(alldirs)), 8, 1, L)
+			var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+			if(!istype(U) || !U.open)
+				U = L.get_inactive_hand()
+
+			if(istype(U) && U.open)
+				if(show_message)
+					to_chat(L, "<span class='notice'>Rain showers loudly onto your umbrella!</span>")
+				continue
 
 			L.water_act(2)
 //			to_chat(L, "<span class='warning'>Rain falls on you, drenching you in water.</span>")
@@ -450,27 +440,22 @@ var/datum/planet/pollux/planet_pollux = null
 
 /datum/weather/pollux/hail/process_effects()
 	..()
-	for(var/mob/living/carbon/human/H in living_mob_list)
+	for(var/mob/living/carbon/human/H as anything in living_mob_list)
 		if(H.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(H)
 			if(!T.outdoors)
 				continue // They're indoors, so no need to pelt them with ice.
-/*
+
 			// If they have an open umbrella, it'll guard from rain
 			// Message plays every time the umbrella gets stolen, just so they're especially aware of what's happening
-			if(istype(H.get_active_hand(), /obj/item/weapon/melee/umbrella))
-				var/obj/item/weapon/melee/umbrella/U = H.get_active_hand()
-				if(U.open)
-					if(show_message)
-						to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
-					continue
-			else if(istype(H.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
-				var/obj/item/weapon/melee/umbrella/U = H.get_inactive_hand()
-				if(U.open)
-					if(show_message)
-						to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
-					continue
-*/
+			var/obj/item/weapon/melee/umbrella/U = H.get_active_hand()
+			if(!istype(U) || !U.open)
+				U = H.get_inactive_hand()
+			if(istype(U) && U.open)
+				if(show_message)
+					to_chat(H, "<span class='notice'>Hail patters gently onto your umbrella.</span>")
+				continue
+
 /datum/weather/pollux/blood_moon
 	name = "blood moon"
 	light_modifier = 0.5
@@ -624,26 +609,22 @@ var/datum/planet/pollux/planet_pollux = null
 
 /datum/weather/pollux/acid_rain/process_effects()
 	..()
-	for(var/mob/living/L in living_mob_list)
+	for(var/mob/living/L as anything in living_mob_list)
 		if(L.z in holder.our_planet.expected_z_levels)
 			var/turf/T = get_turf(L)
 			if(!T.outdoors)
 				continue // They're indoors, so no need to rain on them.
 
-/*			// If they have an open umbrella, it'll guard from rain
-			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
-				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
-				if(U.open)
-					if(show_message)
-						effect_message = "<span class='notice'>Rain patters softly onto your umbrella</span>")
-					continue
-			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
-				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
-				if(U.open)
-					if(show_message)
-						effect_message = "<span class='notice'>Rain patters softly onto your umbrella</span>")
-					continue
-*/
+			// If they have an open umbrella, it'll guard from rain
+			var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+			if(!istype(U) || !U.open)
+				U = L.get_inactive_hand()
+
+			if(istype(U) && U.open)
+				if(show_message)
+					to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella.</span>")
+				continue
+
 			L.water_act(1)
 			if(show_message)
 				to_chat(L, effect_message)
